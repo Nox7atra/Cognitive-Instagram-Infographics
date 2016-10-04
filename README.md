@@ -4,6 +4,7 @@
 * Ввести свой API KEY в API_KEY полученный на сайте [MS Cognitive Sevices Emotion](https://www.microsoft.com/cognitive-services/en-us/emotion-api)
 * Ввести имя пользователя Instagram (без @) в  _CurrentProfile.LoadProfileData("INSTAGRAM ACCOUNT NAME", API_KEY);
 * Запустить
+* Подождать (за прогрессом +- можно следить в Output консольки MSVS)
 * Наслаждаться инфографикой
 
 ##Краткое описание необходимых классов для использования
