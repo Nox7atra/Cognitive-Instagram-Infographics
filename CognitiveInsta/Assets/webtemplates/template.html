@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Instagram Infographics</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+
+<body style="margin-left:15%">
+    
+    <div style="width:40%; float:left">
+      <h1>@$USER_NAME</h1>
+      <div style="width:33%; float:left;">
+        <div style="width:80%;">
+          <img align="center" style="width:100%;" src="$PROFILE_PHOTO_URL" alt="Profile Photo" />
+        </div>
+      </div>
+      <div style="width:66%; float:left;">
+        <p><b>Average number of likes: $AVERAGE_LIKES</b></p>
+        <p><b>Average number of people: $AVERAGE_PEOPLE_ON_PHOTO</b></p>
+        <p><b>Spirit: $SPIRIT</b></p>
+      </div>
+    </div>
+    <div style="width:42%; float:left; margin-top:2%; margin-left:3%">
+        <canvas id="canvas"></canvas>
+    </div>
+    <div id="canvas-holder" style="width:27%; float:left;">
+        <canvas id="chart-area2"  />
+    </div>
+    <div style="width:15%; float:left; float:left;display:table-cell; vertical-align:middle; text-align:center">
+        <p>Happy</p>
+        <img style="width:60%" src="$HAPPY_PHOTO_URL" alt="Profile Photo" />
+    </div>
+    <div style="width:15%; float:left; float:left;display:table-cell; vertical-align:middle; text-align:center">
+        <p>Surpise</p>
+        <img style="width:60%" src="$SURPRISE_PHOTO_URL" alt="Profile Photo" />
+    </div>
+    <div style="width:15%; float:left; float:left;display:table-cell; vertical-align:middle; text-align:center">
+        <p>Angry</p>
+        <img style="width:60%" src="$ANGRY_PHOTO_URL" alt="Profile Photo" />
+    </div>
+    <div style="width:15%; float:left;float:left;display:table-cell; vertical-align:middle; text-align:center">
+        <p>Sad</p>
+        <img style="width:60%" src="$SAD_PHOTO_URL" alt="Profile Photo" />
+    </div>
+    <div id="canvas-holder" style="width:40%;float:left;margin-top:2%;">
+        <canvas id="chart-area1"  />
+    </div>
+    <div id="canvas-holder" style="width:40%; float:left;margin-top:2%; margin-left:7%">
+        <canvas id="chart-area3"  />
+    </div>
+    
+    <script>
+    var likesConfig = {
+            type: 'line',
+            data: {
+                labels: $POSTS_DATA,
+                datasets: [{
+                    label: "Likes dynamic for last 90 posts",
+                    data:$LIKES_DATA,
+                    fill: true,
+                    borderDash: [5, 5],
+                    backgroundColor: "#f1c40f"
+                }]
+            },
+            options: {
+                responsive: true,
+                title:{
+                    display:true,
+                    text:'Likes dynamic'
+                },
+                hover: {
+                    mode: 'dataset'
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Post'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Like'
+                        },
+                        ticks: {
+                            suggestedMin: 0,
+                            suggestedMax: $MAX_LIKES,
+                        }
+                    }]
+                }
+            }
+        };
+    var emoConfig = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: $EMOTIONS_DATA,
+                backgroundColor: $EMOTIONS_COLOR_DATA,
+            }],
+            labels: $EMOTIONS_LABEL_DATA,
+        },
+        options: {
+            title:{
+              display: true,
+              text: "Emotions on photos"
+            },
+            responsive: true
+            
+        }
+    };
+    var peopleChartConfig = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: $PEOPLE_DATA,
+                backgroundColor: [
+                    "#2c3e50",
+                    "#8e44ad",
+                ],
+            }],
+            labels: [
+              "Without People",
+              "With People"
+            ]
+        },
+        options: {
+            title:{
+              display: true,
+              text: "People on photo"
+            },
+            responsive: true
+        }
+    };
+    var emoLikesConfig = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: $EMOTIONS_LIKES_DATA,
+                backgroundColor: $EMOTIONS_COLOR_DATA,
+            }],
+            labels: $EMOTIONS_LABEL_DATA,
+        },
+        options: {
+            title:{
+              display: true,
+              text: "Likes and emotions"
+            },
+            responsive: true
+            
+        }
+    };
+    window.onload = function() {
+        var likesChart = document.getElementById("canvas").getContext("2d");
+        window.myLine = new Chart(likesChart, likesConfig);
+        
+        var emoChart = document.getElementById("chart-area1").getContext("2d");
+        window.myPie1 = new Chart(emoChart, emoConfig);
+        
+        var peopleChart = document.getElementById("chart-area2").getContext("2d");
+        window.myPie2 = new Chart(peopleChart, peopleChartConfig);
+        
+        var emoLikesChart = document.getElementById("chart-area3").getContext("2d");
+        window.myPie3 = new Chart(emoLikesChart, emoLikesConfig);
+    };
+    </script>
+</body>
+
+</html>
