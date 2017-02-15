@@ -31,3 +31,4 @@
   WebInfographicCreator creator = new WebInfographicCreator();
   await creator.CreateWebInfoGraphic(profile, "template.html");
 ```
+К статье https://habrahabr.ru/post/314904/
